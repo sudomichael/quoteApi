@@ -1,6 +1,10 @@
 #!flask/bin/python
 from flask import Flask, jsonify
 
+from flask.ext.httpauth import HTTPBasicAuth
+auth = HTTPBasicAuth()
+
+
 app = Flask(__name__)
 
 quotes = [
@@ -42,6 +46,7 @@ def not_found(error):
 from flask import request
 
 @app.route('/api/v1.0/quotes', methods=['POST'])
+@auth.login_required
 def create_quote():
     if not request.json or not 'quote' in request.json:
         abort(400)
@@ -52,6 +57,18 @@ def create_quote():
     }
     quotes.append(quote)
     return jsonify({'quote': quote}), 201
+
+@auth.get_password
+def get_password(username):
+    if username=='sudomichael':
+        return 'python'
+    return None
+
+@auth.error_handler
+def unauthorized():
+    return make_response(jsonify({'error': 'Unauthorized access'}), 401)
+
+        
 
 if __name__ == '__main__':
     app.run(debug=True)
