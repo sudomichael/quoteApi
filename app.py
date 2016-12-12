@@ -17,7 +17,12 @@ quotes = [
         'id': 2,
         'quote':u'Man surprises me most about humanity. Because he sacrifices his health in order to make money. Then he sacrifices money to recuperate his health. And then he is so anxious about the future that he does not enjoy the present; the result being that he does not live in the present or the future; he lives as if he is never going to die, and then dies having never really lived.',
         'author':u'Dalai Lama'
-    }
+    },
+    {
+        'id': 3,
+        'quote':u'In the end, it\'s not the years in your life that count. It\'s the life in your years',
+        'author':u'Abraham Lincoln'
+    },
 ]
 '''
 @app.route('/')
